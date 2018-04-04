@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+
+before_install:
+  - docker --version
+
+install:
+  - mvn dependency:go-offline -B -V
+
+script:
+  - mvn clean verify -Ptravis-ci
