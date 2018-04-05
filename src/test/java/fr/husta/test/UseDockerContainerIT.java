@@ -24,6 +24,7 @@ public class UseDockerContainerIT {
     private static String tomcatContainerId;
     private static String tomcatContainerIp;
     private static int tomcatContainerPort;
+    private static String dockerHostAddress;
     private static String dockerMachineIp;
 
     @BeforeClass
@@ -34,17 +35,19 @@ public class UseDockerContainerIT {
         tomcatContainerIp = System.getProperty("tomcat.container.ip");
         tomcatContainerPort = Integer.parseInt(System.getProperty("tomcat.container.port", "-1"));
         dockerMachineIp = System.getProperty("docker-machine.ip");
+        // dockerHostAddress will be localhost if native docker, ip from docker-machine if present
+        dockerHostAddress = System.getProperty("docker.host.address");
 
         log.info("tomcatContainerId : " + tomcatContainerId);
         log.info("tomcatContainerIp : " + tomcatContainerIp);
         log.info("tomcatContainerPort : " + tomcatContainerPort);
         log.info("dockerMachineIp : " + dockerMachineIp);
-        log.info("docker.host.address : " + System.getProperty("docker.host.address"));
+        log.info("docker.host.address : " + dockerHostAddress);
     }
 
     @Test
     public void checkSocket() throws IOException {
-        String localContainerIp = (dockerMachineIp.isEmpty() ? /*tomcatContainerIp*/ "localhost" : dockerMachineIp);
+        String localContainerIp = (dockerMachineIp.isEmpty() ? /*tomcatContainerIp*/ dockerHostAddress : dockerMachineIp);
         URL url = new URL("http://" + localContainerIp + ":" + tomcatContainerPort);
         log.info("URL to test : " + url);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
