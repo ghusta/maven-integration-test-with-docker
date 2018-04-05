@@ -163,9 +163,9 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <docker-machine.ip></docker-machine.ip>
-                <dockerHost>tcp://localhost:2376</dockerHost>
-                <certPath></certPath>
+                <docker-machine.ip/>
+                <dockerHost/>
+                <certPath/>
             </properties>
         </profile>
 
