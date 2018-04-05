@@ -1,5 +1,6 @@
 package fr.husta.test;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,6 +28,8 @@ public class UseDockerContainerIT {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        checkDockerDaemonSocket();
+
         tomcatContainerId = System.getProperty("tomcat.container.id");
         tomcatContainerIp = System.getProperty("tomcat.container.ip");
         tomcatContainerPort = Integer.parseInt(System.getProperty("tomcat.container.port", "-1"));
@@ -43,6 +48,19 @@ public class UseDockerContainerIT {
         log.info("URL to test : " + url);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         assertThat(httpURLConnection.getResponseCode()).isEqualTo(200);
+    }
+
+    /**
+     * See https://docs.docker.com/engine/reference/commandline/dockerd/#examples
+     */
+    private static void checkDockerDaemonSocket() {
+        // requires either root permission, or docker group membership.
+        final String unixDockerSocketFile = "/var/run/docker.sock";
+        boolean exists = false;
+        if (SystemUtils.IS_OS_LINUX) {
+            exists = Files.exists(Paths.get(unixDockerSocketFile));
+        }
+        log.debug("Found Docker Daemon Socket ? " + exists);
     }
 
 }
