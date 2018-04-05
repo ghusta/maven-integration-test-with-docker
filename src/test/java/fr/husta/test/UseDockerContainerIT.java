@@ -24,7 +24,14 @@ public class UseDockerContainerIT {
     private static String tomcatContainerId;
     private static String tomcatContainerIp;
     private static int tomcatContainerPort;
+
+    /**
+     * The property ${docker.host.address} is set implicitly to the address of the Docker host.
+     * This host will be taken from the docker.host configuration if HTTP or HTTPS is used.
+     * If a Unix socket is used for communication with the docker daemon, then localhost is assumed.
+     */
     private static String dockerHostAddress;
+
     private static String dockerMachineIp;
 
     @BeforeClass
@@ -35,7 +42,6 @@ public class UseDockerContainerIT {
         tomcatContainerIp = System.getProperty("tomcat.container.ip");
         tomcatContainerPort = Integer.parseInt(System.getProperty("tomcat.container.port", "-1"));
         dockerMachineIp = System.getProperty("docker-machine.ip");
-        // dockerHostAddress will be localhost if native docker, ip from docker-machine if present
         dockerHostAddress = System.getProperty("docker.host.address");
 
         log.info("tomcatContainerId : " + tomcatContainerId);
