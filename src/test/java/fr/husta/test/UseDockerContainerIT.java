@@ -43,7 +43,7 @@ public class UseDockerContainerIT {
 
     @Test
     public void checkSocket() throws IOException {
-        String localContainerIp = (dockerMachineIp.isEmpty() ? tomcatContainerIp : dockerMachineIp);
+        String localContainerIp = (dockerMachineIp.isEmpty() ? /*tomcatContainerIp*/ "localhost" : dockerMachineIp);
         URL url = new URL("http://" + localContainerIp + ":" + tomcatContainerPort);
         log.info("URL to test : " + url);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
