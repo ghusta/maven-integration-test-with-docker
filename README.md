@@ -1,6 +1,6 @@
 # Maven Integration Test with Docker
 
-[![Build Status](https://travis-ci.org/ghusta/maven-integration-test-with-docker.svg?branch=master)](https://travis-ci.org/ghusta/maven-integration-test-with-docker)
+[![Build Status](https://travis-ci.org/ghusta/maven-integration-test-with-docker.svg?branch=jdk-9)](https://travis-ci.org/ghusta/maven-integration-test-with-docker)
 
 ## Overview
 

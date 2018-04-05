@@ -2,6 +2,9 @@ language: java
 
 sudo: required
 
+jdk:
+  - oraclejdk9
+
 services:
   - docker
 
