@@ -109,6 +109,18 @@
 
     <dependencies>
 
+        <!-- LOGGING -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
         <!-- TESTS -->
         <dependency>
             <groupId>junit</groupId>
@@ -146,7 +158,7 @@
             </activation>
             <properties>
                 <docker-machine.ip></docker-machine.ip>
-                <dockerHost></dockerHost>
+                <dockerHost>tcp://localhost:2376</dockerHost>
                 <certPath></certPath>
             </properties>
         </profile>
