@@ -82,6 +82,7 @@
                         <tomcat.container.id>${docker.container.tomcat.id}</tomcat.container.id>
                         <tomcat.container.ip>${docker.container.tomcat.ip}</tomcat.container.ip>
                         <tomcat.container.port>${tomcat.port}</tomcat.container.port>
+                        <docker.host.address>${docker.host.address}</docker.host.address>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

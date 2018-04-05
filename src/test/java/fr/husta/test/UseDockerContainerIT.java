@@ -39,6 +39,7 @@ public class UseDockerContainerIT {
         log.info("tomcatContainerIp : " + tomcatContainerIp);
         log.info("tomcatContainerPort : " + tomcatContainerPort);
         log.info("dockerMachineIp : " + dockerMachineIp);
+        log.info("docker.host.address : " + System.getProperty("docker.host.address"));
     }
 
     @Test
