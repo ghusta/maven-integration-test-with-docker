@@ -23,6 +23,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.24.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -30,11 +35,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.24.0</version>
                 <configuration>
-                    <dockerHost>${dockerHost}</dockerHost>
-                    <certPath>${certPath}</certPath>
-
                     <images>
                         <image>
                             <alias>tomcat</alias>
@@ -155,6 +156,23 @@
                 <dockerHost>tcp://${docker-machine.ip}:2376</dockerHost>
                 <certPath>D:\Dev\Docker\.docker\machine\machines\docker-dev</certPath>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <configuration>
+                            <!--<dockerHost>${dockerHost}</dockerHost>-->
+                            <!--<certPath>${certPath}</certPath>-->
+                            <!-- Prefer docker-machine configuration : https://dmp.fabric8.io/#docker-machine -->
+                            <machine>
+                                <name>docker-dev</name>
+                                <autoCreate>false</autoCreate>
+                            </machine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <profile>
@@ -167,6 +185,16 @@
                 <dockerHost/>
                 <certPath/>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <configuration>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
     </profiles>
